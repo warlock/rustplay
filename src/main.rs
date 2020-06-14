@@ -1,3 +1,7 @@
+mod metodes;
+mod poligons;
+mod users;
+
 fn main() {
     println!("Hello, world!");
     let numbers = [1, 2, 4, 5];
@@ -101,4 +105,64 @@ fn main() {
         ResponseComplete::Error(404, _) => println!("Not foound"),
         ResponseComplete::Error(_, mensage) => println!("Error: {}", mensage),
     }
+    println!("-----------------");
+
+    let result = metodes::suma(1, 2);
+    println!("Resultat: {}", result);
+    println!("-----------------");
+
+    //str -> Stack
+    //String -> Heap
+
+    let var_str = "Hola";
+    let mut var_string = String::from("Hola");
+    var_string.push(' ');
+    var_string.push('a');
+    var_string.push_str("Holaaaaa");
+    println!("Resultat: {}", var_str);
+    println!("Resultat: {}", var_string);
+    println!("-----------------");
+
+    let rect = poligons::Rectangulo { alto: 10, ancho: 5 };
+    let res = poligons::area(rect);
+    println!("Resultat {}", res);
+
+    //  Com s'ha usat rect en la funcio area ha canviat d'owner.
+    // * Cada valor en rust te el seu propi ownership
+    // * Nomes pot existir un ownership a la vegada
+    // * Si un ownership surt del seu alcanç es descartara(finalitza la funcio)
+    let rect = poligons::Rectangulo { alto: 10, ancho: 5 };
+    println!("Alto {} - Ancho {}", rect.alto, rect.ancho);
+    println!("-----------------");
+
+    // Mostra d'ownership amb "pointers"
+    let rect1 = poligons::Rectangulo { alto: 10, ancho: 5 };
+    let res = poligons::area_pointer(&rect1);
+    println!("Alto {} ", res);
+    println!("Alto {} - Ancho {}", rect1.alto, rect1.ancho);
+    println!("-----------------");
+
+    let mut user = users::User {
+        username: String::from("Usuario"),
+        password: String::from("Password"),
+    };
+
+    user.saluda();
+    user.change_password(String::from("abc"));
+    println!("New pass: {}", user.password);
+    println!("-----------------");
+
+    #[derive(Debug)]
+    struct Color(u32, u32, u32);
+    let black = Color(0, 0, 0);
+    let white = Color(255, 255, 255);
+
+    println!("El color es: {:?}", white);
+    println!("El color es: {:?}", black);
+
+    println!("-----------------");
+
+    let message = String::from("Hola Josep");
+    let hola = &message[0..4];
+    println!("El mes: {}", hola);
 }
