@@ -65,4 +65,40 @@ fn main() {
             (_, _) => println!("{}", numero),
         }
     }
+
+    println!("-----------------");
+
+    // Els enum sempre en CamelCase
+    enum Response {
+        Success,
+        Error(u32), // 403, 404, 500
+    }
+
+    let respuesta = Response::Success;
+    match respuesta {
+        Response::Success => println!("La peticio ha anat ok"),
+        Response::Error(403) => println!("Forbidden"),
+        Response::Error(404) => println!("Not foound"),
+        Response::Error(_) => println!("Error identificat"),
+    }
+    let respuesta = Response::Error(403);
+
+    match respuesta {
+        Response::Success => println!("La peticio ha anat ok"),
+        Response::Error(403) => println!("Forbidden"),
+        Response::Error(404) => println!("Not foound"),
+        Response::Error(_) => println!("Error identificat"),
+    }
+
+    enum ResponseComplete {
+        Error(u32, String), // 403, 404, 500
+    }
+
+    let respuesta = ResponseComplete::Error(405, String::from("Problema..."));
+
+    match respuesta {
+        ResponseComplete::Error(403, _) => println!("Forbidden"),
+        ResponseComplete::Error(404, _) => println!("Not foound"),
+        ResponseComplete::Error(_, mensage) => println!("Error: {}", mensage),
+    }
 }
