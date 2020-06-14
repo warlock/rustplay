@@ -25,4 +25,44 @@ fn main() {
     for numero in 1..10 {
         println!("num: {}", numero);
     }
+
+    let num: i32 = 3;
+    match num {
+        1 => println!("Numero uno"),
+        2 => println!("Numero dos"),
+        3 => println!("Numero tres"),
+        _ => println!("Numero default {}", num),
+    }
+
+    let num: i32 = 5;
+
+    match num {
+        1 => println!("Numero uno"),
+        2 => println!("Numero dos"),
+        3 => println!("Numero tres"),
+        4 | 5 | 6 => println!("Entre 4 i 6"),
+        7..=100 => {
+            println!("Es major o igual a 7");
+            println!("Aixo es un rang")
+        }
+        _ => println!("Numero {}", num),
+    }
+
+    let message = match num {
+        1 => "Numero uno",
+        2 => "Numero dos",
+        3 => "Numero tres",
+        _ => "Numero",
+    };
+
+    println!("Result: {}", message);
+
+    for numero in 1..31 {
+        match (numero % 3, numero % 5) {
+            (0, 0) => println!("Fizz buzz"),
+            (0, _) => println!("Fizz"),
+            (_, 0) => println!("Buzz"),
+            (_, _) => println!("{}", numero),
+        }
+    }
 }
